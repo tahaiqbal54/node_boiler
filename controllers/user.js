@@ -6,6 +6,8 @@ const myPassport = require('../passport_setup')(passport);
 let flash = require('connect-flash');
 const {isEmpty} = require('lodash');
 const { validateUser } = require('../validators/signup');
+const email = require('../helpers/emailhelper');
+
 
 exports.show_login = function(req, res, next) {
 	res.render('user/login', { formData: {}, errors: {} });
@@ -38,13 +40,15 @@ exports.signup = function(req, res, next) {
 					newUser = models.User.build({
 						email: req.body.email,
 						password: generateHash(req.body.password)
-					});					
+					});	
+					email.main(req.body.email, "Sign Up Alert", "Hey Sir/Madam, Thanks for Signing Up...");				
 				} else {
 					newUser = models.User.build({
 						email: req.body.email,
 						password: generateHash(req.body.password),
 						is_admin: true
 					});
+					email.main(req.body.email, "Sign Up Alert", "Hey Sir/Madam, Thanks for Signing Up As Admin...")
 				}
 				return newUser.save().then(result => {
 					passport.authenticate('local', {
