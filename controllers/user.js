@@ -48,7 +48,8 @@ exports.signup = function(req, res, next) {
 						password: generateHash(req.body.password),
 						is_admin: true
 					});
-					email.main(req.body.email, "Sign Up Alert", "Hey Sir/Madam, Thanks for Signing Up As Admin...")
+					//email.main(req.body.email, "Sign Up Alert", "Hey Sir/Madam, Thanks for Signing Up As Admin...")
+					email.main(req.body.email, "Sign Up Alert", "Hey Sir/Madam, Thanks for Signing Up As Admin...");
 				}
 				return newUser.save().then(result => {
 					passport.authenticate('local', {
