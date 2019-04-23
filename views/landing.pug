@@ -12,9 +12,12 @@ html(lang='en')
             h1.mb-3 A Basic application to maintain your TODO list...
             p.lead Feature Coming Soon to attach prototype picture with content....
             p.lead.mb-4 WELCOME TO THE WORL OF TODO...!!
-            form(action="/", method="POST")
+            form(action="/", method="POST", enctype = "multipart/form-data")
               .input-group.mb-3
                 input(name="lead_email", type="email", placeholder="Enter your email address").form-control
+                br
+              .input-group.mb-3
+                input(name="image_file", type="file", placeholder="Your File plz")
                 .input-group-append
                   button(type="submit").btn.btn-primary Get Started
     include common/footer.pug

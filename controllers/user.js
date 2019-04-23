@@ -18,8 +18,10 @@ exports.show_signup = function(req, res, next) {
 }
 
 const rerender_signup = function(errors, req, res, next) {
-	res.render('user/signup', { formData: req.body, errors: errors});
+	res.render('user/signup', { formData: req.body, errors});
 }
+
+
 const generateHash = function(password) {
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 }
@@ -48,7 +50,6 @@ exports.signup = function(req, res, next) {
 						password: generateHash(req.body.password),
 						is_admin: true
 					});
-					//email.main(req.body.email, "Sign Up Alert", "Hey Sir/Madam, Thanks for Signing Up As Admin...")
 					email.main(req.body.email, "Sign Up Alert", "Hey Sir/Madam, Thanks for Signing Up As Admin...");
 				}
 				return newUser.save().then(result => {
